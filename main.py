@@ -1,16 +1,35 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Trafiasz na dokładnie jeden znak zapytania.
+question_marks: list = [3, 8, 18, 23, 34, 43]
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def task1() -> float:
+	counter: int = 0
+	for i in range(1, 8):
+		for j in question_marks:
+			if 6 * i >= j - 1 >= 1 * i:
+				counter += 1
+	return counter / 42
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def task2() -> float:
+	counter: int = 0
+	for i in range(2, 8):
+		for j in question_marks:
+			if 6 * i >= j + 2 >= 1 * i:  # j - 1 + 3
+				counter += 1
+	return counter / 42
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+def task3() -> int:
+	k: int = 0
+	biggest_count: int = 0
+
+	for i in range(1, 8):
+		counter: int = 0
+		for j in question_marks:
+			if 6 * i >= j - 1 >= 1 * i:
+				counter += 1
+		if counter > biggest_count:
+			biggest_count = counter
+			k = i
+	return k
