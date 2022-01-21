@@ -9,8 +9,7 @@ question_marks: list = [3, 8, 18, 23, 34, 43]
 def roll_dice(custom_dice=None) -> int:
 	if not custom_dice:
 		return random.randint(1, 7)
-	else:
-		return random.choice(custom_dice)
+	return random.choice(custom_dice)
 
 
 # Funkcja symuluje 7 rzutów i wyznacza w którym rzucie udało się stanąć na pytajniku DOKŁADNIE 1 RAZ
@@ -70,8 +69,23 @@ def exercise_4(attempts: list, rolls_list: list, number_of_rolls: int) -> None:
 	for n in attempts:
 		prob.append(n / number_of_rolls)
 	plot([0, 1, 2, 3, 4, 5, 6, 7], prob, 'ro')
-	title('Prawdopodobienstwo')
+	title('Prawdopodobieństwo')
 	show()
+
+
+def calculate_probability(field: int, rolls_count: int, number_of_rolls: int) -> tuple:
+	success_sum: int = 0
+	attempts: list = [0, 0, 0, 0, 0, 0, 0, 0]
+	rolls_list: list = []
+	for x in range(1, number_of_rolls):
+		roll_no: int = simulate_rolling(field, rolls_count)
+		if roll_no:
+			success_sum += 1
+			attempts[roll_no] += 1
+			rolls_list.append(roll_no)
+
+	probability: float = success_sum / number_of_rolls
+	return probability, attempts, rolls_list
 
 
 def exercise_5(number_of_rolls: int) -> None:
@@ -95,21 +109,6 @@ def exercise_5(number_of_rolls: int) -> None:
 			ax[i, j].set_title(label='Powtórzeń: ' + str(ranges[k]))
 			k = k + 1
 	show()
-
-
-def calculate_probability(field: int, rolls_count: int, number_of_rolls: int) -> tuple:
-	success_sum: int = 0
-	attempts: list = [0, 0, 0, 0, 0, 0, 0, 0]
-	rolls_list: list = []
-	for x in range(1, number_of_rolls):
-		roll_no: int = simulate_rolling(field, rolls_count)
-		if roll_no:
-			success_sum += 1
-			attempts[roll_no] += 1
-			rolls_list.append(roll_no)
-
-	probability: float = success_sum / number_of_rolls
-	return probability, attempts, rolls_list
 
 
 def sum_of_rolls(rolls_number: int, attempts: int, custom_dice: list = None) -> list:
